@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v6
  
       - name: Run AccuKnox xBOM Scan
-        uses: accuknox/xbom-action@latest
+        uses: accuknox/xbom-action@3.0
         with:
           bom-type:           sbom
           path:               "."
