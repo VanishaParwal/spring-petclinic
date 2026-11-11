@@ -1,0 +1,37 @@
+name: AccuKnox xBOM Scan
+ 
+on:
+  release:
+    types: [published]
+ 
+jobs:
+  xbom-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      actions:  read
+      contents: write
+ 
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+ 
+      - name: Run AccuKnox xBOM Scan
+        uses: accuknox/xbom-action@latest
+        with:
+          bom-type:           sbom
+          path:               "."
+          token:              ${{ secrets.ACCUKNOX_TOKEN }}
+          endpoint:           ${{ secrets.ACCUKNOX_ENDPOINT }}
+          label:              ${{ secrets.ACCUKNOX_LABEL }}
+          project-name:       v-test
+          project-classifier: application
+ 
+      - name: Download Workflow Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+ 
+      - name: Upload SBOM to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*.json
