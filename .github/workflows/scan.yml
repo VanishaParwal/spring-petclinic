@@ -33,4 +33,4 @@ jobs:
           # SBOM – image or filesystem (project_name required)
           sbom_scan_type: "filesystem"
           sbom_scan_path: "."
-          sbom_project_name: "v-test"
+          sbom_project_name: "testv"
