@@ -1,0 +1,32 @@
+name: AccuKnox SBOM Scan Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  sbom-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run AccuKnox SBOM Scan
+        uses: VanishaParwal/sbom_action@main
+        with:
+          # SBOM project name in AccuKnox
+          project_name: "enrich"
+
+          # AccuKnox credentials
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
+
+          # Optional
+          scan_path: "."             # Directory to scan ('filesystem <scan_path>')
+         
