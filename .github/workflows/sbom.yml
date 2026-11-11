@@ -28,7 +28,7 @@ jobs:
           token: ${{ secrets.ACCUKNOX_TOKEN }}
           endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
           label: ${{ secrets.ACCUKNOX_LABEL }}
-          project-name: v-test
+          project-name: knoxtest
           project-classifier: application
 
       - name: Download Workflow Artifacts
